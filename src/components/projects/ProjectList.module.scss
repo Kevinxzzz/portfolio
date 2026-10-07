@@ -1,0 +1,13 @@
+@use "mixins" as *;
+
+.item {
+  @include hairline-top;
+
+  &:last-child {
+    border-bottom: 1px solid var(--line);
+  }
+}
+
+.panel {
+  padding-left: calc(2.25rem + var(--space-3));
+}

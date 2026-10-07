@@ -1,0 +1,59 @@
+@use "mixins" as *;
+
+// Sizes come from `--core-size`, set by CoreSystem for each layout.
+.avatar {
+  position: relative;
+  isolation: isolate;
+  width: var(--core-size);
+  height: var(--core-size);
+
+  // Rings are solid so connection lines appear to start at their outer edge.
+  &::before,
+  &::after {
+    content: "";
+    position: absolute;
+    border-radius: var(--radius-round);
+    background: var(--bg);
+  }
+
+  &::before {
+    inset: -22%;
+    z-index: -1;
+    border: 1px solid var(--line-strong);
+  }
+
+  &::after {
+    inset: -46%;
+    z-index: -2;
+    border: 1px solid var(--line);
+
+    @include compact {
+      display: none;
+    }
+  }
+}
+
+.disc {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  border-radius: var(--radius-round);
+  background: var(--bg-raised);
+  border: 1px solid var(--line-strong);
+}
+
+.photo {
+  object-fit: cover;
+}
+
+.monogram {
+  display: grid;
+  place-items: center;
+  width: 100%;
+  height: 100%;
+  font-size: calc(var(--core-size) * 0.32);
+  font-weight: 300;
+  letter-spacing: var(--tracking-display);
+  color: var(--fg);
+}

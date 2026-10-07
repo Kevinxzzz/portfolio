@@ -1,0 +1,56 @@
+// Design tokens. Mirrored in DESIGN.md.
+:root {
+  // Colour
+  --bg: #07090d;
+  --bg-raised: #0b0f15;
+  --fg: #e9edf3;
+  --fg-muted: #8a97ab;
+  --fg-dim: #5d6b80;
+  --line: rgba(160, 185, 215, 0.14);
+  --line-strong: rgba(160, 185, 215, 0.28);
+  --accent: #5cc8f5;
+  --accent-soft: rgba(92, 200, 245, 0.14);
+
+  // Type
+  --font-sans: var(--font-geist-sans), system-ui, -apple-system, "Segoe UI", sans-serif;
+  --font-mono: var(--font-geist-mono), ui-monospace, "SFMono-Regular", Menlo, monospace;
+  --text-xs: 0.75rem;
+  --text-sm: 0.875rem;
+  --text-base: 1rem;
+  --text-md: 1.125rem;
+  --text-lg: clamp(1.25rem, 1.1rem + 0.6vw, 1.5rem);
+  --text-xl: clamp(1.5rem, 1.2rem + 1.2vw, 2rem);
+  --display-md: clamp(2.25rem, 1.4rem + 3.6vw, 4.5rem);
+  --display-lg: clamp(3rem, 1.5rem + 6.5vw, 8rem);
+  --tracking-label: 0.14em;
+  --tracking-display: -0.045em;
+
+  // Space (4px base)
+  --space-1: 0.25rem;
+  --space-2: 0.5rem;
+  --space-3: 0.75rem;
+  --space-4: 1rem;
+  --space-5: 1.5rem;
+  --space-6: 2rem;
+  --space-7: 3rem;
+  --space-8: 4rem;
+  --space-9: 6rem;
+  --space-10: 8rem;
+  --gutter: clamp(20px, 5vw, 64px);
+  --content-max: 1280px;
+
+  // Shape: square rectangles, round only for inherently circular things.
+  --radius-none: 0;
+  --radius-round: 999px;
+
+  // Motion
+  --ease-out: cubic-bezier(0.22, 1, 0.36, 1);
+  --ease-in-out: cubic-bezier(0.65, 0, 0.35, 1);
+  --dur-fast: 160ms;
+  --dur-base: 320ms;
+  --dur-slow: 700ms;
+
+  // Layout
+  --bar-height: 64px;
+  --stage-pad-y: 72px;
+}

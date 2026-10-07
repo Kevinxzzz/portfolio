@@ -1,0 +1,71 @@
+// Breakpoints + mixins. Contains no CSS output, safe to `@use` anywhere.
+$bp-sm: 480px;
+$bp-md: 768px;
+$bp-lg: 1024px;
+$bp-xl: 1440px;
+
+// The core renders as a spatial network only when there is room for it.
+// Keep in sync with `NETWORK_QUERY` in src/lib/media.ts.
+$network-min-width: 768px;
+$network-min-height: 640px;
+
+@mixin from($bp) {
+  @media (min-width: $bp) {
+    @content;
+  }
+}
+
+@mixin until($bp) {
+  @media (max-width: #{$bp - 1px}) {
+    @content;
+  }
+}
+
+@mixin network {
+  @media (min-width: $network-min-width) and (min-height: $network-min-height) {
+    @content;
+  }
+}
+
+@mixin compact {
+  @media not all and (min-width: $network-min-width), not all and (min-height: $network-min-height) {
+    @content;
+  }
+}
+
+@mixin reduced-motion {
+  @media (prefers-reduced-motion: reduce) {
+    @content;
+  }
+}
+
+@mixin fine-pointer {
+  @media (hover: hover) and (pointer: fine) {
+    @content;
+  }
+}
+
+@mixin label {
+  font-family: var(--font-mono);
+  font-size: var(--text-xs);
+  font-weight: 400;
+  letter-spacing: var(--tracking-label);
+  text-transform: uppercase;
+  line-height: 1.4;
+}
+
+@mixin container {
+  width: min(100% - (var(--gutter) * 2), var(--content-max));
+  margin-inline: auto;
+}
+
+@mixin hairline-top {
+  border-top: 1px solid var(--line);
+}
+
+// Interactive element transition (colour + transform only).
+@mixin interactive($props: color) {
+  transition-property: $props;
+  transition-duration: var(--dur-base);
+  transition-timing-function: var(--ease-out);
+}

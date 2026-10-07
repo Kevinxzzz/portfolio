@@ -1,0 +1,21 @@
+@use "mixins" as *;
+@use "split" as *;
+
+.layout {
+  @include split {
+    display: grid;
+    grid-template-columns: minmax(0, 5fr) minmax(0, 7fr);
+    gap: var(--space-8);
+    align-items: start;
+  }
+}
+
+// Detail pane follows the reader while the list is in view.
+.pane {
+  @include split {
+    position: sticky;
+    top: calc(var(--bar-height) + var(--space-6));
+    padding-top: var(--space-2);
+    @include hairline-top;
+  }
+}

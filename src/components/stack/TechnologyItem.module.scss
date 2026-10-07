@@ -1,0 +1,40 @@
+@use "mixins" as *;
+
+.item {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+  width: 100%;
+  min-height: 48px;
+  font-size: var(--text-lg);
+  font-weight: 300;
+  color: var(--fg-muted);
+  @include interactive(color);
+
+  &:hover,
+  &:focus-visible {
+    color: var(--fg);
+  }
+
+  &:focus-visible {
+    outline-offset: -1px;
+  }
+}
+
+.dot {
+  flex: none;
+  width: 5px;
+  height: 5px;
+  border-radius: var(--radius-round);
+  background: var(--accent);
+  transform: scale(0);
+  transition: transform var(--dur-base) var(--ease-out);
+}
+
+.active {
+  color: var(--fg);
+
+  .dot {
+    transform: scale(1);
+  }
+}

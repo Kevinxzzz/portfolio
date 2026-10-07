@@ -1,0 +1,15 @@
+@use "mixins" as *;
+
+// Four columns on desktop, two on tablet, one on mobile.
+.groups {
+  display: grid;
+  gap: var(--space-7) var(--space-6);
+
+  @include from($bp-md) {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  @include from($bp-lg) {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+  }
+}

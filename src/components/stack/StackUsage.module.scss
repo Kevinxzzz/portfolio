@@ -1,0 +1,52 @@
+@use "mixins" as *;
+
+.usage {
+  display: grid;
+  gap: var(--space-4);
+  margin-top: var(--space-8);
+  padding-top: var(--space-5);
+  @include hairline-top;
+}
+
+.caption {
+  @include label;
+  min-height: 2.8em;
+  color: var(--fg-muted);
+}
+
+.projects {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-3) var(--space-6);
+}
+
+.project {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+  font-size: var(--text-xl);
+  font-weight: 300;
+  letter-spacing: -0.015em;
+  color: var(--fg-dim);
+  transition: color var(--dur-base) var(--ease-out);
+}
+
+.dot {
+  flex: none;
+  width: 7px;
+  height: 7px;
+  border: 1px solid currentColor;
+  border-radius: var(--radius-round);
+  transition:
+    background-color var(--dur-base) var(--ease-out),
+    border-color var(--dur-base) var(--ease-out);
+}
+
+.lit {
+  color: var(--fg);
+
+  .dot {
+    border-color: var(--accent);
+    background: var(--accent);
+  }
+}

@@ -1,0 +1,74 @@
+@use "mixins" as *;
+@use "split" as *;
+
+.row {
+  display: grid;
+  grid-template-columns: 2.25rem minmax(0, 1fr);
+  align-items: baseline;
+  gap: var(--space-1) var(--space-3);
+  width: 100%;
+  padding-block: var(--space-5);
+  color: var(--fg-muted);
+  @include interactive(color);
+
+  @include from($bp-md) {
+    grid-template-columns: 3rem minmax(0, 1fr) auto;
+    gap: var(--space-4);
+  }
+
+  // In the split view the kind lives in the detail pane.
+  @include split {
+    grid-template-columns: 3rem minmax(0, 1fr);
+  }
+
+  &:hover,
+  &:focus-visible {
+    color: var(--fg);
+  }
+
+  &:focus-visible {
+    outline-offset: -1px;
+  }
+}
+
+.index {
+  @include label;
+  color: var(--fg-dim);
+  transition: color var(--dur-base) var(--ease-out);
+}
+
+.name {
+  font-size: clamp(1.75rem, 1rem + 2.6vw, 3.25rem);
+  font-weight: 300;
+  line-height: 1.05;
+  letter-spacing: var(--tracking-display);
+  transition: transform var(--dur-base) var(--ease-out);
+  overflow-wrap: anywhere;
+}
+
+.kind {
+  @include label;
+  grid-column: 2;
+  color: var(--fg-dim);
+
+  @include from($bp-md) {
+    grid-column: auto;
+  }
+
+  @include split {
+    display: none;
+  }
+}
+
+.selected {
+  color: var(--fg);
+
+  .index {
+    color: var(--accent);
+  }
+}
+
+.row:hover .name,
+.selected .name {
+  transform: translateX(var(--space-2));
+}

@@ -1,0 +1,96 @@
+@use "mixins" as *;
+
+.entry {
+  position: relative;
+  display: grid;
+  gap: var(--space-3);
+  padding-block: var(--space-6);
+
+  &:first-child {
+    padding-top: 0;
+  }
+
+  // Node on the rail (the rail itself belongs to SectionLayout).
+  &::before {
+    content: "";
+    position: absolute;
+    top: calc(var(--space-6) + 0.55em);
+    left: calc(var(--rail-pad) * -1);
+    width: 7px;
+    height: 7px;
+    border: 1px solid var(--fg-muted);
+    border-radius: var(--radius-round);
+    background: var(--bg);
+    transform: translateX(-50%);
+  }
+
+  &:first-child::before {
+    top: 0.55em;
+  }
+
+  @include from($bp-md) {
+    grid-template-columns: minmax(96px, 1fr) 4fr;
+    gap: var(--space-6);
+  }
+}
+
+.kind {
+  @include label;
+  padding-top: 0.5em;
+  color: var(--fg-dim);
+}
+
+.content {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+  max-width: 60ch;
+}
+
+.role {
+  font-size: var(--text-xl);
+  font-weight: 300;
+  line-height: 1.2;
+  letter-spacing: -0.015em;
+}
+
+.meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-1) var(--space-4);
+  color: var(--accent);
+  font-size: var(--text-sm);
+}
+
+.summary {
+  color: var(--fg-muted);
+}
+
+.responsibilities {
+  display: grid;
+  gap: var(--space-2);
+
+  li {
+    position: relative;
+    padding-left: var(--space-5);
+
+    &::before {
+      content: "";
+      position: absolute;
+      top: 0.75em;
+      left: 0;
+      width: var(--space-4);
+      height: 1px;
+      background: var(--line-strong);
+    }
+  }
+}
+
+.technologies {
+  @include label;
+  color: var(--fg-muted);
+}
+
+.result {
+  color: var(--fg);
+}

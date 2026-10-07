@@ -1,0 +1,38 @@
+@use "mixins" as *;
+
+.practices {
+  display: grid;
+  gap: var(--space-3);
+  margin-top: var(--space-8);
+  padding-top: var(--space-5);
+  @include hairline-top;
+
+  @include from($bp-md) {
+    grid-template-columns: minmax(96px, 1fr) 4fr;
+    gap: var(--space-6);
+  }
+}
+
+.heading {
+  @include label;
+  color: var(--fg-dim);
+  font-weight: 400;
+}
+
+.list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-2) var(--space-5);
+  color: var(--fg-muted);
+
+  li + li {
+    position: relative;
+
+    &::before {
+      content: "/";
+      position: absolute;
+      left: calc(var(--space-5) / -2 - 0.25em);
+      color: var(--fg-dim);
+    }
+  }
+}

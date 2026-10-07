@@ -1,0 +1,62 @@
+@use "mixins" as *;
+
+.button {
+  @include label;
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 44px;
+  padding: 0 var(--space-5);
+  border: 1px solid var(--fg);
+  border-radius: var(--radius-none);
+  color: var(--fg);
+  white-space: nowrap;
+  overflow: hidden;
+  isolation: isolate;
+  @include interactive(color border-color);
+
+  // Fill that slides in from the left on hover: transform only.
+  &::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    z-index: -1;
+    background: var(--accent);
+    transform: scaleX(0);
+    transform-origin: left center;
+    transition: transform var(--dur-base) var(--ease-out);
+  }
+
+  &:hover,
+  &:focus-visible {
+    border-color: var(--accent);
+  }
+}
+
+.text {
+  position: relative;
+}
+
+.solid {
+  background: var(--fg);
+  color: var(--bg);
+
+  &:hover,
+  &:focus-visible {
+    color: var(--bg);
+
+    &::before {
+      transform: scaleX(1);
+    }
+  }
+}
+
+.line {
+  border-color: var(--line-strong);
+
+  &:hover,
+  &:focus-visible {
+    color: var(--accent);
+  }
+}

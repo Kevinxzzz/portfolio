@@ -1,0 +1,156 @@
+@use "mixins" as *;
+
+.home {
+  display: flex;
+  flex-direction: column;
+  height: 100dvh;
+  overflow-x: hidden;
+  overflow-y: hidden;
+
+  // Compact: the list can be taller than the viewport (short phones, landscape).
+  @include compact {
+    overflow-y: auto;
+    scrollbar-width: none;
+    overscroll-behavior: contain;
+
+    &::-webkit-scrollbar {
+      display: none;
+    }
+  }
+}
+
+.bar {
+  display: flex;
+  flex: none;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: var(--space-3) var(--space-5);
+  min-height: var(--bar-height);
+  padding: var(--space-3) var(--gutter);
+  padding-inline: max(var(--gutter), env(safe-area-inset-left)) max(var(--gutter), env(safe-area-inset-right));
+}
+
+.hint {
+  @include label;
+  color: var(--fg-dim);
+  display: none;
+
+  @include fine-pointer {
+    @include network {
+      display: block;
+    }
+  }
+}
+
+.actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-3);
+
+  @include compact {
+    width: 100%;
+    max-width: 520px;
+    margin-inline: auto;
+
+    > * {
+      flex: 1 1 140px;
+    }
+  }
+}
+
+.camera {
+  position: relative;
+  min-height: 0;
+
+  @include network {
+    flex: 1;
+  }
+
+  @include compact {
+    flex: 0 0 auto;
+    margin-block: auto;
+    padding: var(--space-5) var(--gutter);
+  }
+}
+
+.stage {
+  --core-size: 96px;
+
+  @include network {
+    --core-size: clamp(120px, min(22dvh, 18vw), 200px);
+    position: absolute;
+    inset: var(--space-5) var(--gutter);
+    max-width: 1680px;
+    margin-inline: auto;
+  }
+
+  @include compact {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    max-width: 520px;
+    margin-inline: auto;
+  }
+}
+
+// Network: a zero-size anchor on the stage centre. Wires converge on the avatar.
+.core {
+  @include network {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    width: 0;
+    height: 0;
+    animation: appear var(--dur-slow) var(--ease-out) backwards;
+
+    > :first-child {
+      position: absolute;
+      left: 0;
+      top: 0;
+      transform: translate(-50%, -50%);
+    }
+
+    // Below the outer ring, with a solid background so wires pass *behind* the text.
+    > :last-child {
+      position: absolute;
+      top: calc(var(--core-size) * 0.96 + var(--space-4));
+      left: 0;
+      width: max-content;
+      max-width: 90vw;
+      padding: var(--space-2) var(--space-3);
+      background: var(--bg);
+      transform: translateX(-50%);
+    }
+  }
+
+  @include compact {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: var(--space-5);
+    padding: var(--space-5) 0 var(--space-6);
+    animation: appear var(--dur-slow) var(--ease-out) backwards;
+
+    > :first-child {
+      margin: calc(var(--core-size) * 0.22);
+    }
+  }
+}
+
+.nav {
+  display: contents;
+}
+
+.nodes {
+  @include network {
+    position: absolute;
+    inset: 0;
+  }
+}
+
+@keyframes appear {
+  from {
+    opacity: 0;
+  }
+}

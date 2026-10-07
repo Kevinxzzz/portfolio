@@ -1,0 +1,84 @@
+@use "mixins" as *;
+
+// Hidden until the transition shows the matching slot (inline `display: block`).
+.slot {
+  display: none;
+  padding-block: var(--space-7) var(--space-9);
+
+  @include from($bp-md) {
+    padding-block: var(--space-9) var(--space-10);
+  }
+}
+
+// The rail: same hairline that connected the node to the core.
+.frame {
+  --rail-pad: 20px;
+  @include container;
+  position: relative;
+  padding-left: var(--rail-pad);
+
+  @include from($bp-md) {
+    --rail-pad: 48px;
+  }
+
+  &::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    width: 1px;
+    background: linear-gradient(to bottom, var(--line-strong), var(--line));
+  }
+}
+
+.head {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-4);
+  margin-bottom: var(--space-8);
+
+  // The node: marks where this section hangs from the rail.
+  &::before {
+    content: "";
+    position: absolute;
+    top: 0.45em;
+    left: calc(var(--rail-pad) * -1);
+    width: 9px;
+    height: 9px;
+    border-radius: var(--radius-round);
+    background: var(--accent);
+    transform: translateX(-50%);
+  }
+}
+
+.title {
+  max-width: 18ch;
+  font-size: var(--display-md);
+  font-weight: 300;
+  line-height: 1.02;
+  letter-spacing: var(--tracking-display);
+  text-wrap: balance;
+  overflow-wrap: break-word;
+
+  &:focus-visible {
+    outline: none;
+  }
+}
+
+.large {
+  max-width: 12ch;
+  font-size: clamp(2.5rem, 1rem + 8vw, 8rem);
+  line-height: 0.95;
+}
+
+.intro {
+  max-width: 52ch;
+  font-size: var(--text-md);
+  color: var(--fg-muted);
+}
+
+.body {
+  position: relative;
+}

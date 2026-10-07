@@ -1,0 +1,18 @@
+@use "mixins" as *;
+
+.status {
+  @include label;
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-3);
+  color: var(--fg-muted);
+}
+
+// Static on purpose: nothing in the interface blinks.
+.dot {
+  flex: none;
+  width: 6px;
+  height: 6px;
+  border-radius: var(--radius-round);
+  background: var(--accent);
+}

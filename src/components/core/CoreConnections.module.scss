@@ -1,0 +1,34 @@
+@use "mixins" as *;
+
+.canvas {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  overflow: visible;
+  pointer-events: none;
+
+  // The compact (mobile) layout is a list: the connection is the rail instead.
+  @include compact {
+    display: none;
+  }
+}
+
+.wire {
+  stroke: var(--line-strong);
+  stroke-width: 1;
+  vector-effect: non-scaling-stroke;
+  transition: stroke var(--dur-base) var(--ease-out);
+  animation: appear var(--dur-slow) var(--ease-out) 480ms backwards;
+
+  &[data-active="true"],
+  &[data-target="true"] {
+    stroke: var(--accent);
+  }
+}
+
+@keyframes appear {
+  from {
+    opacity: 0;
+  }
+}

@@ -1,0 +1,27 @@
+@use "mixins" as *;
+
+.identity {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-2);
+  text-align: center;
+}
+
+.tag {
+  display: flex;
+  justify-content: center;
+}
+
+.name {
+  font-size: clamp(2rem, 1.2rem + 2.2vw, 3.25rem);
+  font-weight: 300;
+  line-height: 1.04;
+  letter-spacing: var(--tracking-display);
+  text-wrap: balance;
+}
+
+.role {
+  @include label;
+  color: var(--fg-muted);
+}

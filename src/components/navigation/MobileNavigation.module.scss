@@ -1,0 +1,52 @@
+@use "mixins" as *;
+
+.bar {
+  position: sticky;
+  bottom: 0;
+  z-index: 10;
+  flex: none;
+  margin-top: auto;
+  padding-bottom: env(safe-area-inset-bottom);
+  background: var(--bg);
+  border-top: 1px solid var(--line);
+
+  @include from($bp-md) {
+    display: none;
+  }
+}
+
+.list {
+  display: grid;
+  grid-template-columns: repeat(6, 1fr);
+}
+
+.link {
+  @include label;
+  position: relative;
+  display: grid;
+  place-items: center;
+  min-height: 52px;
+  color: var(--fg-muted);
+  @include interactive(color);
+
+  // Current position: a short rail segment on the bar's top edge.
+  &::before {
+    content: "";
+    position: absolute;
+    top: -1px;
+    left: 25%;
+    right: 25%;
+    height: 1px;
+    background: var(--accent);
+    transform: scaleX(0);
+    transition: transform var(--dur-base) var(--ease-out);
+  }
+
+  &[aria-current="page"] {
+    color: var(--accent);
+
+    &::before {
+      transform: scaleX(1);
+    }
+  }
+}

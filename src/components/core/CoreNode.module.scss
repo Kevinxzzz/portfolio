@@ -1,0 +1,158 @@
+@use "mixins" as *;
+
+$dot: 10px;
+$label-gap: 20px;
+
+.node {
+  @include label;
+  font-size: var(--text-sm);
+  animation: appear var(--dur-slow) var(--ease-out) calc(160ms + var(--i) * 70ms) backwards;
+
+  // Network: a zero-size anchor sitting exactly on the node's coordinates.
+  @include network {
+    position: absolute;
+    left: calc(var(--x) * 1%);
+    top: calc(var(--y) * 1%);
+    width: 0;
+    height: 0;
+  }
+}
+
+.link {
+  color: var(--fg-muted);
+  @include interactive(color);
+
+  @include network {
+    position: absolute;
+    inset: -24px;
+  }
+
+  // Compact: a numbered row, same node, same dot.
+  @include compact {
+    display: flex;
+    align-items: center;
+    gap: var(--space-4);
+    min-height: 52px;
+    border-top: 1px solid var(--line);
+  }
+}
+
+.dot {
+  flex: none;
+  width: $dot;
+  height: $dot;
+  border: 1px solid var(--fg-muted);
+  border-radius: var(--radius-round);
+  background: var(--bg);
+  transition:
+    transform var(--dur-base) var(--ease-out),
+    background-color var(--dur-base) var(--ease-out),
+    border-color var(--dur-base) var(--ease-out);
+
+  @include network {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    margin: calc($dot / -2) 0 0 calc($dot / -2);
+  }
+}
+
+.label {
+  display: flex;
+  gap: var(--space-1);
+  white-space: nowrap;
+
+  @include network {
+    position: absolute;
+    flex-direction: column;
+
+    // Outer side of the node on wide screens...
+    @include from($bp-lg) {
+      top: 50%;
+      transform: translateY(-50%);
+
+      [data-side="right"] > .link > & {
+        left: calc(50% + $label-gap);
+      }
+
+      [data-side="left"] > .link > & {
+        right: calc(50% + $label-gap);
+        align-items: flex-end;
+        text-align: right;
+      }
+    }
+
+    // ...below it on tablets, where the outer side has no room.
+    @include until($bp-lg) {
+      top: calc(50% + 16px);
+      left: 50%;
+      align-items: center;
+      text-align: center;
+      transform: translateX(-50%);
+    }
+  }
+
+  @include compact {
+    flex-direction: row;
+    align-items: baseline;
+    gap: var(--space-3);
+  }
+}
+
+.index {
+  color: var(--fg-dim);
+  transition: color var(--dur-base) var(--ease-out);
+
+  @include compact {
+    &::after {
+      content: " —";
+    }
+  }
+}
+
+.arrow {
+  display: none;
+  color: var(--fg-dim);
+  transition:
+    transform var(--dur-base) var(--ease-out),
+    color var(--dur-base) var(--ease-out);
+
+  @include compact {
+    display: block;
+    margin-left: auto;
+  }
+}
+
+// Hover / focus / keyboard: driven by state so the wire lights up with the node.
+.node[data-active="true"] {
+  .link {
+    color: var(--fg);
+  }
+
+  .dot {
+    transform: scale(1.5);
+    border-color: var(--accent);
+    background: var(--accent);
+  }
+
+  .index {
+    color: var(--accent);
+  }
+
+  .arrow {
+    color: var(--accent);
+    transform: translateX(4px);
+  }
+}
+
+li:last-child > .link {
+  @include compact {
+    border-bottom: 1px solid var(--line);
+  }
+}
+
+@keyframes appear {
+  from {
+    opacity: 0;
+  }
+}

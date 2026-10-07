@@ -1,0 +1,15 @@
+// Projects: list + detail pane from 900px, accordion below.
+// Keep in sync with `SPLIT_QUERY` in src/lib/media.ts.
+$split-min-width: 900px;
+
+@mixin split {
+  @media (min-width: $split-min-width) {
+    @content;
+  }
+}
+
+@mixin accordion {
+  @media (max-width: #{$split-min-width - 1px}) {
+    @content;
+  }
+}
