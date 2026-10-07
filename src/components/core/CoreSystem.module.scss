@@ -29,6 +29,8 @@
   min-height: var(--bar-height);
   padding: var(--space-3) var(--gutter);
   padding-inline: max(var(--gutter), env(safe-area-inset-left)) max(var(--gutter), env(safe-area-inset-right));
+  position: relative;
+  z-index: 10;
 }
 
 .hint {
