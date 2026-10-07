@@ -32,9 +32,21 @@ export function ProjectsSection() {
           onSelect={handleSelect}
         />
 
-        {split && selected && (
+        {split && (
           <aside id={DETAIL_PANE_ID} className={styles.pane} aria-label="Detalhes do projeto">
-            <ProjectDetails key={selected.id} project={selected} />
+            {projects.map((project) => {
+              const isSelected = project.id === (selected?.id ?? projects[0]?.id);
+              return (
+                <div
+                  key={project.id}
+                  className={styles.paneItem}
+                  data-selected={isSelected}
+                  aria-hidden={!isSelected}
+                >
+                  <ProjectDetails project={project} />
+                </div>
+              );
+            })}
           </aside>
         )}
       </div>

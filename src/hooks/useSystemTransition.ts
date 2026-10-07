@@ -51,16 +51,16 @@ export function useSystemTransition({ view, homeRef, cameraRef, overlayRef }: Pa
       const node = camera.querySelector<HTMLElement>(byAttr(DOM_ATTR.node, view));
       if (node) origin.current = getOriginRatio(camera, node);
       lastSection.current = view;
-      timeline.current = playEnter(view, origin.current, options).eventCallback("onComplete", () =>
+      timeline.current = playEnter(view, origin.current, options).add(() =>
         focusHeading(overlay, view),
       );
     } else if (from !== "core" && view === "core") {
-      timeline.current = playExit(from, origin.current, options).eventCallback("onComplete", () =>
+      timeline.current = playExit(from, origin.current, options).add(() =>
         focusNode(camera, from),
       );
     } else if (from !== "core" && view !== "core") {
       lastSection.current = view;
-      timeline.current = playSwitch(from, view, options).eventCallback("onComplete", () =>
+      timeline.current = playSwitch(from, view, options).add(() =>
         focusHeading(overlay, view),
       );
     }
