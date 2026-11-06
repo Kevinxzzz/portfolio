@@ -1,4 +1,5 @@
 import { Button } from "@/components/ui/Button";
+import { useLanguage } from "@/i18n/LanguageContext";
 import type { Project } from "@/types";
 
 import styles from "./ProjectDetails.module.scss";
@@ -9,6 +10,7 @@ interface ProjectDetailsProps {
 
 /** Summary, real features, and the stack as a connected column of layers. */
 export function ProjectDetails({ project }: ProjectDetailsProps) {
+  const { dict } = useLanguage();
   const hasLinks = Boolean(project.href || project.repository);
 
   return (
@@ -16,8 +18,8 @@ export function ProjectDetails({ project }: ProjectDetailsProps) {
       <p className={styles.kind}>{project.kind}</p>
       <p className={styles.summary}>{project.summary}</p>
 
-      <section className={styles.block} aria-label="Características">
-        <h4 className={styles.heading}>Características</h4>
+      <section className={styles.block} aria-label={dict.ui.features}>
+        <h4 className={styles.heading}>{dict.ui.features}</h4>
         <ul className={styles.features}>
           {project.features.map((feature) => (
             <li key={feature}>{feature}</li>
@@ -25,8 +27,8 @@ export function ProjectDetails({ project }: ProjectDetailsProps) {
         </ul>
       </section>
 
-      <section className={styles.block} aria-label="Tecnologias">
-        <h4 className={styles.heading}>Tecnologias</h4>
+      <section className={styles.block} aria-label={dict.ui.technologies}>
+        <h4 className={styles.heading}>{dict.ui.technologies}</h4>
         <ol className={styles.layers}>
           {project.layers.map((layer) => (
             <li key={layer.label} className={styles.layer}>
@@ -41,7 +43,7 @@ export function ProjectDetails({ project }: ProjectDetailsProps) {
         <div className={styles.links}>
           {project.href && (
             <Button href={project.href} target="_blank" rel="noopener noreferrer">
-              View project
+              {dict.ui.viewProject}
             </Button>
           )}
           {project.repository && (
@@ -51,7 +53,7 @@ export function ProjectDetails({ project }: ProjectDetailsProps) {
               target="_blank"
               rel="noopener noreferrer"
             >
-              Repository
+              {dict.ui.repository}
             </Button>
           )}
         </div>

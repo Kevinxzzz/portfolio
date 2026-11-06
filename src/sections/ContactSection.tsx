@@ -1,5 +1,8 @@
+"use client";
+
 import { Button } from "@/components/ui/Button";
 import { profile } from "@/data/profile";
+import { useLanguage } from "@/i18n/LanguageContext";
 import { REVEAL } from "@/lib/dom";
 import { SectionLayout } from "@/layouts/SectionLayout";
 import type { ResolvedAssets } from "@/types";
@@ -31,13 +34,14 @@ function getChannels(): Channel[] {
 }
 
 export function ContactSection({ assets }: ContactSectionProps) {
+  const { dict } = useLanguage();
   const channels = getChannels();
   const { email } = profile.contact;
 
   return (
-    <SectionLayout id="contact" title="Let’s build something." large>
+    <SectionLayout id="contact" title={dict.ui.contactTitle} large>
       <p className={styles.lead} {...REVEAL}>
-        Estou aberto a oportunidades e projetos.
+        {dict.profile.availability}
       </p>
 
       {channels.length > 0 && (

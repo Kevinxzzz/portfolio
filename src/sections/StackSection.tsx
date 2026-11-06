@@ -1,26 +1,26 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useMemo } from "react";
 
 import { StackGroup } from "@/components/stack/StackGroup";
 import { StackUsage } from "@/components/stack/StackUsage";
-import { projects } from "@/data/projects";
-import { stackGroups } from "@/data/stack";
+import { useLanguage } from "@/i18n/LanguageContext";
 import { SectionLayout } from "@/layouts/SectionLayout";
 import { buildTechnologyIndex, findProjectsUsing } from "@/utils/technologies";
 
 import styles from "./StackSection.module.scss";
 
-const technologyIndex = buildTechnologyIndex(projects);
-
 export function StackSection() {
+  const { dict } = useLanguage();
   const [activeTechnology, setActiveTechnology] = useState<string | null>(null);
+  
+  const technologyIndex = useMemo(() => buildTechnologyIndex(dict.projects), [dict.projects]);
   const usedBy = activeTechnology ? findProjectsUsing(technologyIndex, activeTechnology) : [];
 
   return (
-    <SectionLayout id="stack" title="Stack" intro="Tecnologias agrupadas pela função que exercem.">
+    <SectionLayout id="stack" title={dict.ui.stackTitle} intro={dict.ui.stackIntro}>
       <div className={styles.groups}>
-        {stackGroups.map((group) => (
+        {dict.stack.map((group) => (
           <StackGroup
             key={group.id}
             group={group}
@@ -30,7 +30,7 @@ export function StackSection() {
         ))}
       </div>
 
-      <StackUsage projects={projects} activeTechnology={activeTechnology} usedBy={usedBy} />
+      <StackUsage projects={dict.projects} activeTechnology={activeTechnology} usedBy={usedBy} />
     </SectionLayout>
   );
 }

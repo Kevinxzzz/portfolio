@@ -17,5 +17,22 @@
     top: calc(var(--bar-height) + var(--space-6));
     padding-top: var(--space-2);
     @include hairline-top;
+    
+    // Grid stack to keep height stable based on the tallest project
+    display: grid;
+  }
+}
+
+.paneItem {
+  grid-area: 1 / 1;
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+  transition: opacity var(--dur-base) var(--ease-out), visibility var(--dur-base) var(--ease-out);
+
+  &[data-selected="true"] {
+    opacity: 1;
+    visibility: visible;
+    pointer-events: auto;
   }
 }

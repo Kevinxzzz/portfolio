@@ -161,7 +161,8 @@ export function playExit(
   const { everything, targetWire, others } = partition(camera, id);
 
   const restore = () => {
-    gsap.set([camera, ...chrome, ...everything], { clearProps: "all" });
+    gsap.set([camera, ...chrome], { clearProps: "all" });
+    gsap.set(everything, { clearProps: "opacity,visibility" });
     targetWire?.removeAttribute("data-target");
     gsap.set(overlay, { clearProps: "all" });
     showOnlySlot(overlay, null);

@@ -4,13 +4,14 @@ import { type RefObject, useState } from "react";
 
 import { Button } from "@/components/ui/Button";
 import { StatusIndicator } from "@/components/ui/StatusIndicator";
-import { profile } from "@/data/profile";
+import { useLanguage } from "@/i18n/LanguageContext";
 import { SECTIONS } from "@/data/sections";
 import { sectionClickHandler } from "@/lib/navigation-store";
 import { DOM_ATTR } from "@/lib/dom";
 import type { ResolvedAssets, SectionId } from "@/types";
 
 import { CoreAvatar } from "./CoreAvatar";
+import { HeaderControls } from "@/components/ui/HeaderControls";
 import { CoreConnections } from "./CoreConnections";
 import { CoreIdentity } from "./CoreIdentity";
 import { CoreNode } from "./CoreNode";
@@ -29,14 +30,15 @@ interface CoreSystemProps {
  * sit outside of it and fade on their own (`data-chrome`).
  */
 export function CoreSystem({ homeRef, cameraRef, assets, inert }: CoreSystemProps) {
+  const { dict } = useLanguage();
   const [activeId, setActiveId] = useState<SectionId | null>(null);
   const chromeAttr = { [DOM_ATTR.chrome]: "" };
 
   return (
     <div ref={homeRef} className={styles.home} inert={inert}>
       <header className={styles.bar} {...chromeAttr}>
-        <StatusIndicator>{profile.availability}</StatusIndicator>
-        <p className={styles.hint}>Press 1–6 to navigate</p>
+        <StatusIndicator>{dict.profile.availability}</StatusIndicator>
+        <HeaderControls />
       </header>
 
       <main ref={cameraRef} className={styles.camera}>
@@ -44,8 +46,8 @@ export function CoreSystem({ homeRef, cameraRef, assets, inert }: CoreSystemProp
           <CoreConnections activeId={activeId} />
 
           <div className={styles.core}>
-            <CoreAvatar name={profile.name} alt={profile.photoAlt} photo={assets.photo} />
-            <CoreIdentity name={profile.name} role={profile.role} />
+            <CoreAvatar name={dict.profile.name} alt={dict.profile.photoAlt} photo={assets.photo} />
+            <CoreIdentity name={dict.profile.name} role={dict.profile.role} />
           </div>
 
           <nav aria-label="Portfolio sections" className={styles.nav}>
@@ -68,7 +70,7 @@ export function CoreSystem({ homeRef, cameraRef, assets, inert }: CoreSystemProp
         <div className={styles.actions}>
           {assets.cv && (
             <Button href={assets.cv} download>
-              Download CV
+              {dict.ui.downloadCV}
             </Button>
           )}
           <Button
@@ -76,7 +78,7 @@ export function CoreSystem({ homeRef, cameraRef, assets, inert }: CoreSystemProp
             variant={assets.cv ? "line" : "solid"}
             onClick={sectionClickHandler("contact")}
           >
-            Get in touch
+            {dict.ui.getInTouch}
           </Button>
         </div>
       </footer>
