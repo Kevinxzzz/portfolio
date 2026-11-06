@@ -49,15 +49,14 @@ export const projects: Project[] = [
     ],
   },
   {
-    id: "shop-martins",
-    name: "Shop Martins",
-    kind: "Marketplace",
-    summary: "Marketplace desenvolvido com Next.js.",
+    id: "Bluefoot",
+    name: "Bluefoot",
+    kind: "E-commerce",
+    summary: "E-commerce desenvolvido com Next.js.",
     features: [
       "Autenticação",
       "Catálogo",
       "Produtos",
-      "Integração com WhatsApp",
       "Interface responsiva",
     ],
     layers: [

@@ -22,9 +22,9 @@ export const pt = {
   stack,
   sections: [
     { id: "about", label: "SOBRE" },
-    { id: "stack", label: "STACK" },
-    { id: "projects", label: "PROJETOS" },
     { id: "experience", label: "EXPERIÊNCIA" },
+    { id: "projects", label: "PROJETOS" },
+    { id: "stack", label: "STACK" },
     { id: "education", label: "FORMAÇÃO" },
     { id: "contact", label: "CONTATO" },
   ],

@@ -8,11 +8,11 @@ import type { SectionMeta } from "@/types";
  */
 export const SECTIONS: readonly SectionMeta[] = [
   { id: "about", index: "01", label: "About", position: { x: 20, y: 19 } },
-  { id: "stack", index: "02", label: "Stack", position: { x: 77, y: 13 } },
-  { id: "projects", index: "03", label: "Projects", position: { x: 90, y: 49 } },
-  { id: "experience", index: "04", label: "Experience", position: { x: 83, y: 85 } },
-  { id: "education", index: "05", label: "Education", position: { x: 17, y: 89 } },
-  { id: "contact", index: "06", label: "Contact", position: { x: 9, y: 57 } },
+  { id: "experience", index: "02", label: "Experience", position: { x: 9, y: 57 } },
+  { id: "projects", index: "03", label: "Projects", position: { x: 17, y: 89 } },
+  { id: "stack", index: "04", label: "Stack", position: { x: 77, y: 13 } },
+  { id: "education", index: "05", label: "Education", position: { x: 90, y: 49 } },
+  { id: "contact", index: "06", label: "Contact", position: { x: 83, y: 85 } },
 ] as const;
 
 export const CORE_POSITION = { x: 50, y: 50 } as const;

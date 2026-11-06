@@ -56,9 +56,9 @@ export const en = {
   stack,
   sections: [
     { id: "about", label: "ABOUT" },
-    { id: "stack", label: "STACK" },
-    { id: "projects", label: "PROJECTS" },
     { id: "experience", label: "EXPERIENCE" },
+    { id: "projects", label: "PROJECTS" },
+    { id: "stack", label: "STACK" },
     { id: "education", label: "EDUCATION" },
     { id: "contact", label: "CONTACT" },
   ],
