@@ -22,10 +22,28 @@ interface ContactSectionProps {
 }
 
 function getChannels(): Channel[] {
-  const { email, github, linkedin } = profile.contact;
+  const { email, github, linkedin, phone, whatsapp } = profile.contact;
   const channels: Channel[] = [];
 
-  if (email) channels.push({ label: "Email", value: email, href: `mailto:${email}`, external: false });
+  const effectiveEmail = email || "kevinmaravilhapro@gmail.com";
+  const emailHref = `https://mail.google.com/mail/?view=cm&fs=1&to=${encodeURIComponent(effectiveEmail)}`;
+  channels.push({
+    label: "Email",
+    value: effectiveEmail,
+    href: emailHref,
+    external: true,
+  });
+
+  const effectivePhone = phone || "+55 83 999911363";
+  const effectiveWhatsapp =
+    whatsapp || `https://wa.me/${effectivePhone.replace(/\D/g, "")}`;
+  channels.push({
+    label: "WhatsApp",
+    value: effectivePhone,
+    href: effectiveWhatsapp,
+    external: true,
+  });
+
   if (github) channels.push({ label: "GitHub", value: displayUrl(github), href: github, external: true });
   if (linkedin)
     channels.push({ label: "LinkedIn", value: displayUrl(linkedin), href: linkedin, external: true });
@@ -36,7 +54,7 @@ function getChannels(): Channel[] {
 export function ContactSection({ assets }: ContactSectionProps) {
   const { dict } = useLanguage();
   const channels = getChannels();
-  const { email } = profile.contact;
+  const email = profile.contact.email || "kevinmaravilhapro@gmail.com";
 
   return (
     <SectionLayout id="contact" title={dict.ui.contactTitle} large>
@@ -66,10 +84,18 @@ export function ContactSection({ assets }: ContactSectionProps) {
 
       {(email || assets.cv) && (
         <div className={styles.actions} {...REVEAL}>
-          {email && <Button href={`mailto:${email}`}>Get in touch</Button>}
+          {email && (
+            <Button
+              href={`https://mail.google.com/mail/?view=cm&fs=1&to=${encodeURIComponent(email)}`}
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              {dict.ui.getInTouch}
+            </Button>
+          )}
           {assets.cv && (
-            <Button href={assets.cv} variant="line" download>
-              Download CV
+            <Button href={assets.cv} variant="line" download="Curriculo.pdf">
+              {dict.ui.downloadCV}
             </Button>
           )}
         </div>

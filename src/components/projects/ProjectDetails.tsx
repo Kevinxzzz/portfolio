@@ -11,7 +11,8 @@ interface ProjectDetailsProps {
 /** Summary, real features, and the stack as a connected column of layers. */
 export function ProjectDetails({ project }: ProjectDetailsProps) {
   const { dict } = useLanguage();
-  const hasLinks = Boolean(project.href || project.repository);
+  const websiteUrl = project.href || project.url;
+  const hasLinks = Boolean(websiteUrl || project.repository);
 
   return (
     <article className={styles.details} aria-label={project.name}>
@@ -41,9 +42,9 @@ export function ProjectDetails({ project }: ProjectDetailsProps) {
 
       {hasLinks && (
         <div className={styles.links}>
-          {project.href && (
-            <Button href={project.href} target="_blank" rel="noopener noreferrer">
-              {dict.ui.viewProject}
+          {websiteUrl && (
+            <Button href={websiteUrl} target="_blank" rel="noopener noreferrer">
+              {dict.ui.visitWebsite || dict.ui.viewProject}
             </Button>
           )}
           {project.repository && (

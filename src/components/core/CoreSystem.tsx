@@ -47,7 +47,12 @@ export function CoreSystem({ homeRef, cameraRef, assets, inert }: CoreSystemProp
 
           <div className={styles.core}>
             <CoreAvatar name={dict.profile.name} alt={dict.profile.photoAlt} photo={assets.photo} />
-            <CoreIdentity name={dict.profile.name} role={dict.profile.role} />
+            <CoreIdentity
+              name={dict.profile.name}
+              role={dict.profile.role}
+              cvHref={assets.cv}
+              downloadLabel={dict.ui.downloadCV}
+            />
           </div>
 
           <nav aria-label="Portfolio sections" className={styles.nav}>
@@ -68,14 +73,9 @@ export function CoreSystem({ homeRef, cameraRef, assets, inert }: CoreSystemProp
 
       <footer className={styles.bar} {...chromeAttr}>
         <div className={styles.actions}>
-          {assets.cv && (
-            <Button href={assets.cv} download>
-              {dict.ui.downloadCV}
-            </Button>
-          )}
           <Button
             href="#contact"
-            variant={assets.cv ? "line" : "solid"}
+            variant="solid"
             onClick={sectionClickHandler("contact")}
           >
             {dict.ui.getInTouch}

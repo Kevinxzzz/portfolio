@@ -22,10 +22,12 @@ export const profile: Profile = {
   photoAlt: "Retrato profissional de Kevin Maravilha",
   assets: {
     photo: "/images/foto-profissional.png",
-    cv: "/cv/kevin-maravilha-cv.pdf",
+    cv: "/cv/Curriculo.pdf",
   },
   contact: {
-    email: undefined,
+    email: "kevinmaravilhapro@gmail.com",
+    phone: "+55 83 999911363",
+    whatsapp: "https://wa.me/5583999911363",
     github: undefined,
     linkedin: undefined,
   },
@@ -35,19 +37,19 @@ export const profile: Profile = {
 
 export const aboutStatements: AboutStatement[] = [
   {
-    key: "Who",
-    text: "Desenvolvedor Full Stack e estudante de Análise e Desenvolvimento de Sistemas.",
+    key: "Quem",
+    text: "Desenvolvedor Full Stack com formação em Análise e Desenvolvimento de Sistemas.",
   },
   {
-    key: "What",
-    text: "Aplicações web, APIs, sistemas SaaS e projetos para clientes reais.",
+    key: "O que",
+    text: "Aplicações web, APIs, sistemas SaaS e soluções desenvolvidas para clientes reais.",
   },
   {
-    key: "How",
-    text: "Frontend e backend, buscando aplicações organizadas, escaláveis e com boa experiência de usuário.",
+    key: "Como",
+    text: "Do frontend ao backend, com foco em arquitetura organizada, código sustentável e boa experiência de usuário.",
   },
   {
-    key: "Next",
-    text: "Aberto a oportunidades e projetos.",
+    key: "Próximo",
+    text: "Buscando oportunidades para evoluir, construir produtos e assumir novos desafios.",
   },
 ];

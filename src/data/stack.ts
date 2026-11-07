@@ -5,7 +5,7 @@ export const stackGroups: StackGroup[] = [
   {
     id: "frontend",
     label: "Frontend",
-    items: ["React", "Next.js", "TypeScript", "HTML", "SCSS", "React Query"],
+    items: ["React", "Next.js", "TypeScript", "React Query", "Vite", "SCSS", "Tailwind",],
   },
   {
     id: "backend",
@@ -15,7 +15,7 @@ export const stackGroups: StackGroup[] = [
   {
     id: "infra",
     label: "Infra / Tools",
-    items: ["Docker", "Git", "GitHub", "Redis"],
+    items: ["Docker", "Redis", "Cloudflare R2", "AWS S3", "Socket.IO"],
   },
   {
     id: "mobile",
