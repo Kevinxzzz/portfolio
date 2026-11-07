@@ -22,7 +22,8 @@ export const profile: Profile = {
   photoAlt: "Retrato profissional de Kevin Maravilha",
   assets: {
     photo: "/images/foto-profissional.png",
-    cv: "/cv/Curriculo.pdf",
+    cv: "/cv/Curriculo-Kevin-Maravilha.pdf",
+    cvFileName: "Curriculo-Kevin-Maravilha.pdf",
   },
   contact: {
     email: "kevinmaravilhapro@gmail.com",

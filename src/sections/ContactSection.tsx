@@ -94,7 +94,11 @@ export function ContactSection({ assets }: ContactSectionProps) {
             </Button>
           )}
           {assets.cv && (
-            <Button href={assets.cv} variant="line" download="Curriculo.pdf">
+            <Button
+              href={assets.cv}
+              variant="line"
+              download={assets.cvFileName || "Curriculo-Kevin-Maravilha.pdf"}
+            >
               {dict.ui.downloadCV}
             </Button>
           )}

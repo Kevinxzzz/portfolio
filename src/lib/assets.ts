@@ -13,8 +13,12 @@ function resolvePublicAsset(publicPath: string): string | null {
  * UI never links to something that would 404 (monogram / hidden CV instead).
  */
 export function resolveAssets(assets: Profile["assets"]): ResolvedAssets {
+  const cvPath = resolvePublicAsset(assets.cv);
+  const cvFileName = assets.cvFileName || (cvPath ? path.basename(cvPath) : "Curriculo-Kevin-Maravilha.pdf");
+
   return {
     photo: resolvePublicAsset(assets.photo),
-    cv: resolvePublicAsset(assets.cv),
+    cv: cvPath,
+    cvFileName,
   };
 }

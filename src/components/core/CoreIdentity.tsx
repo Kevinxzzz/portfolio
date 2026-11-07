@@ -6,11 +6,18 @@ interface CoreIdentityProps {
   name: string;
   role: string;
   cvHref?: string | null;
+  cvFileName?: string;
   downloadLabel?: string;
 }
 
 /** The page's only `h1`. Understood in seconds: who, and what. */
-export function CoreIdentity({ name, role, cvHref, downloadLabel }: CoreIdentityProps) {
+export function CoreIdentity({
+  name,
+  role,
+  cvHref,
+  cvFileName = "Curriculo-Kevin-Maravilha.pdf",
+  downloadLabel,
+}: CoreIdentityProps) {
   return (
     <div className={styles.identity}>
       <div className={styles.tag}>
@@ -20,7 +27,7 @@ export function CoreIdentity({ name, role, cvHref, downloadLabel }: CoreIdentity
       <p className={styles.role}>{role}</p>
 
       {cvHref && downloadLabel && (
-        <a href={cvHref} download="Curriculo.pdf" className={styles.cvButton}>
+        <a href={cvHref} download={cvFileName} className={styles.cvButton}>
           <svg
             className={styles.cvIcon}
             viewBox="0 0 16 16"
