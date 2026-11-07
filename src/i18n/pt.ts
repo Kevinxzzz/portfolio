@@ -22,9 +22,9 @@ export const pt = {
   stack,
   sections: [
     { id: "about", label: "SOBRE" },
-    { id: "stack", label: "STACK" },
-    { id: "projects", label: "PROJETOS" },
     { id: "experience", label: "EXPERIÊNCIA" },
+    { id: "projects", label: "PROJETOS" },
+    { id: "stack", label: "STACK" },
     { id: "education", label: "FORMAÇÃO" },
     { id: "contact", label: "CONTATO" },
   ],
@@ -56,12 +56,13 @@ export const pt = {
     roleAt: "na",
     present: "O momento",
 
-    downloadCV: "Baixar CV",
+    downloadCV: "Baixar currículo",
     getInTouch: "Entrar em contato",
 
     features: "Características",
     technologies: "Tecnologias",
-    viewProject: "Ver projeto",
+    viewProject: "Visitar site",
+    visitWebsite: "Visitar site",
     repository: "Repositório",
   }
 };

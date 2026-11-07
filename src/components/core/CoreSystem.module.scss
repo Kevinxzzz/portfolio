@@ -31,6 +31,17 @@
   padding-inline: max(var(--gutter), env(safe-area-inset-left)) max(var(--gutter), env(safe-area-inset-right));
   position: relative;
   z-index: 10;
+
+  @include compact {
+    flex-wrap: nowrap;
+    gap: var(--space-3);
+  }
+}
+
+header.bar {
+  @include compact {
+    border-bottom: 1px solid var(--line);
+  }
 }
 
 .hint {
@@ -88,6 +99,8 @@
   }
 
   @include compact {
+    --core-size: clamp(64px, 18vw, 76px);
+    --rail: calc(var(--core-size) * 1.68);
     display: flex;
     flex-direction: column;
     width: 100%;
@@ -104,6 +117,7 @@
     top: 50%;
     width: 0;
     height: 0;
+    z-index: 2;
     animation: appear var(--dur-slow) var(--ease-out) backwards;
 
     > :first-child {
@@ -116,7 +130,7 @@
     // Below the outer ring, with a solid background so wires pass *behind* the text.
     > :last-child {
       position: absolute;
-      top: calc(var(--core-size) * 0.96 + var(--space-4));
+      top: calc(var(--core-size) * 0.96 + var(--space-3));
       left: 0;
       width: max-content;
       max-width: 90vw;
@@ -127,15 +141,38 @@
   }
 
   @include compact {
-    display: flex;
-    flex-direction: column;
+    position: relative;
+    display: grid;
+    grid-template-columns: var(--rail) minmax(0, 1fr);
     align-items: center;
-    gap: var(--space-5);
-    padding: var(--space-5) 0 var(--space-6);
+    column-gap: var(--space-4);
+    padding: var(--space-4) 0 var(--space-6);
     animation: appear var(--dur-slow) var(--ease-out) backwards;
 
+    // Vertical spine starts at the centre of the avatar and runs straight down
+    // into the first section node.
+    &::before {
+      content: "";
+      position: absolute;
+      top: 50%;
+      bottom: 0;
+      left: calc(var(--rail) / 2);
+      width: 1px;
+      margin-left: -0.5px;
+      background: var(--line-strong);
+      transform-origin: top center;
+      animation: draw var(--dur-base) var(--ease-out) 120ms backwards;
+    }
+
     > :first-child {
-      margin: calc(var(--core-size) * 0.22);
+      position: relative;
+      z-index: 1;
+      justify-self: center;
+    }
+
+    > :last-child {
+      position: relative;
+      z-index: 1;
     }
   }
 }
@@ -148,11 +185,22 @@
   @include network {
     position: absolute;
     inset: 0;
+    pointer-events: none;
+
+    > * {
+      pointer-events: auto;
+    }
   }
 }
 
 @keyframes appear {
   from {
     opacity: 0;
+  }
+}
+
+@keyframes draw {
+  from {
+    transform: scaleY(0);
   }
 }

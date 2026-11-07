@@ -1,26 +1,113 @@
 @use "mixins" as *;
 
-// One quiet line: this section deliberately carries less weight than Projects.
-.line {
+.list {
   display: flex;
-  flex-wrap: wrap;
-  align-items: baseline;
-  gap: var(--space-3) var(--space-4);
-  padding-top: var(--space-5);
+  flex-direction: column;
+  border-bottom: 1px solid var(--line);
+}
+
+.item {
+  position: relative;
+  display: grid;
+  gap: var(--space-3);
+  padding-block: var(--space-5);
   @include hairline-top;
+
+  // Node on the section rail (echoing ExperienceTimeline).
+  &::before {
+    content: "";
+    position: absolute;
+    top: calc(var(--space-5) + 0.45em);
+    left: calc(var(--rail-pad) * -1);
+    width: 7px;
+    height: 7px;
+    border: 1px solid var(--fg-muted);
+    border-radius: var(--radius-round);
+    background: var(--bg);
+    transform: translateX(-50%);
+  }
+
+  @include from($bp-md) {
+    grid-template-columns: minmax(140px, 1.2fr) minmax(0, 3.5fr) auto;
+    align-items: baseline;
+    gap: var(--space-6);
+    padding-block: var(--space-6);
+
+    &::before {
+      top: calc(var(--space-6) + 0.55em);
+    }
+  }
+}
+
+.kind {
+  @include label;
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-2);
+  color: var(--fg-dim);
+}
+
+.index {
+  color: var(--accent);
+}
+
+.sep {
+  color: var(--fg-dim);
+}
+
+.main {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+  min-width: 0;
+
+  @include from($bp-md) {
+    flex-direction: row;
+    flex-wrap: wrap;
+    align-items: baseline;
+    gap: var(--space-2) var(--space-4);
+  }
+}
+
+.course {
+  font-size: clamp(1.25rem, 1.05rem + 1vw, 1.75rem);
+  font-weight: 300;
+  line-height: 1.2;
+  letter-spacing: -0.015em;
+  color: var(--fg);
+  text-wrap: balance;
 }
 
 .institution {
-  font-size: var(--text-xl);
-  font-weight: 300;
-  letter-spacing: -0.015em;
-}
+  @include label;
+  color: var(--fg-muted);
 
-.dash {
-  color: var(--fg-dim);
+  @include from($bp-md) {
+    &::before {
+      content: "— ";
+      color: var(--fg-dim);
+    }
+  }
 }
 
 .status {
   @include label;
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-2);
   color: var(--fg-muted);
+  margin-top: var(--space-1);
+
+  @include from($bp-md) {
+    margin-top: 0;
+    justify-self: end;
+  }
+}
+
+.statusDot {
+  flex: none;
+  width: 6px;
+  height: 6px;
+  border-radius: var(--radius-round);
+  background: var(--accent);
 }

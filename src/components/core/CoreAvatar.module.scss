@@ -20,6 +20,10 @@
     inset: -22%;
     z-index: -1;
     border: 1px solid var(--line-strong);
+
+    @include compact {
+      inset: -18%;
+    }
   }
 
   &::after {
@@ -28,7 +32,7 @@
     border: 1px solid var(--line);
 
     @include compact {
-      display: none;
+      inset: -34%;
     }
   }
 }

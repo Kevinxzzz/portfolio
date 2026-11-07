@@ -27,6 +27,8 @@ export interface ContactLinks {
   email?: string;
   github?: string;
   linkedin?: string;
+  phone?: string;
+  whatsapp?: string;
 }
 
 export interface Profile {
@@ -74,6 +76,7 @@ export interface Project {
   /** Technologies grouped by the role they play. The flat list is derived. */
   layers: ArchitectureLayer[];
   href?: string;
+  url?: string;
   repository?: string;
 }
 
@@ -91,7 +94,9 @@ export interface ExperienceEntry {
 }
 
 export interface Education {
+  id: string;
+  kind: string;
   course: string;
-  institution: string;
+  institution?: string;
   status: string;
 }
