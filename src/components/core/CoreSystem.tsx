@@ -51,6 +51,7 @@ export function CoreSystem({ homeRef, cameraRef, assets, inert }: CoreSystemProp
               name={dict.profile.name}
               role={dict.profile.role}
               cvHref={assets.cv}
+              cvFileName={assets.cvFileName}
               downloadLabel={dict.ui.downloadCV}
             />
           </div>

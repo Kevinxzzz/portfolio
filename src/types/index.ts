@@ -41,6 +41,7 @@ export interface Profile {
   assets: {
     photo: string;
     cv: string;
+    cvFileName?: string;
   };
   contact: ContactLinks;
   description: string;
@@ -49,6 +50,7 @@ export interface Profile {
 export interface ResolvedAssets {
   photo: string | null;
   cv: string | null;
+  cvFileName?: string;
 }
 
 export interface AboutStatement {
